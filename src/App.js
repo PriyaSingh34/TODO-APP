@@ -1,6 +1,8 @@
 
 import './App.css';
 import {useState} from "react";
+import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
 
 function App() {
 
@@ -51,22 +53,16 @@ if(todo!==''){
     <div className='App'>
       <div className='container'>
         <h1>Todo list App</h1>
-        <form className='todoForm' onSubmit={handleSubmit}>
-          <input type="text" onChange={handleGo} value={todo}/>
-          <button type='submit'>{editId?"Edit":"Go"} </button>
-        </form>
-        <ul className='allTodos'>
-          {
-            todos.map((t)=>(
-              <li className='singleTodo'><span className='todoText' key={t.id}>{t.todo}</span>
-              <button onClick={()=>handleEdit(t.id)}>Edit</button>
-              <button onClick={()=>handleDelete(t.id)}>Delete</button>
-              </li>
-            ))
-          }
-         
-          
-        </ul>
+        <TodoForm
+        handleSubmit={handleSubmit}
+        handleGo={handleGo}
+        todo={todo}
+        editId={editId}/>
+        
+        <TodoList
+        handleDelete={handleDelete}
+        handleEdit={handleEdit}
+        todos={todos}/>
       </div>
       {
       /* {
